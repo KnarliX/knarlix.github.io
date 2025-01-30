@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NextGen Experience | Coming Soon</title>
+    <title>Knarlix | Coming Soon</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&family=Roboto:wght@300;500;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <!-- Replace YOUR_KIT_CODE with your Font Awesome kit code -->
+    <script src="https://kit.fontawesome.com/YOUR_KIT_CODE.js" crossorigin="anonymous"></script>
     <style>
         * {
             margin: 0;
@@ -139,6 +141,7 @@
             bottom: 2rem;
             display: flex;
             gap: 1.5rem;
+            z-index: 3;
         }
 
         .social-icon {
@@ -150,6 +153,13 @@
         .social-icon:hover {
             color: #00ffff;
             transform: translateY(-3px);
+        }
+
+        #errorMessage {
+            color: #ff4444;
+            margin-top: 10px;
+            display: none;
+            font-size: 0.9rem;
         }
 
         @media (max-width: 768px) {
@@ -172,7 +182,7 @@
     <div id="particles-js"></div>
     
     <div class="container">
-        <h1 class="neon-title">Epic Experience Loading</h1>
+        <h1 class="neon-title">Epic Launch Incoming</h1>
         
         <div class="countdown">
             <div class="countdown-item">
@@ -193,21 +203,31 @@
             </div>
         </div>
 
-        <div class="newsletter">
-            <input type="email" class="newsletter-input" placeholder="Enter email for early access">
-            <button class="newsletter-button">Notify Me</button>
-        </div>
+        <form class="newsletter" id="emailForm">
+            <input type="email" class="newsletter-input" id="emailInput" 
+                   placeholder="Enter email for early access" required>
+            <div id="errorMessage"></div>
+            <button type="submit" class="newsletter-button">Notify Me</button>
+        </form>
 
         <div class="social-links">
-            <a href="https://github.com/KnarliX/" target="_blank" class="social-icon" ><i class="fab fa-github"></i></a>
-            <a href="https://youtube.com/channel/UCn0U0vU1QfNUky7Dz7E_SMg" target="_blank" class="social-icon"><i class="fab fa-youtube"></i></a>
-            <a href="https://www.instagram.com/knarlix" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
-            <a href="https://discord.com/users/1212719184870383621" target="_blank" class="social-icon"><i class="fab fa-discord"></i></a>
+            <a href="https://github.com/KnarliX/" target="_blank" class="social-icon">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="https://youtube.com/channel/UCn0U0vU1QfNUky7Dz7E_SMg" target="_blank" class="social-icon">
+                <i class="fab fa-youtube"></i>
+            </a>
+            <a href="https://www.instagram.com/knarlix" target="_blank" class="social-icon">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://discord.com/users/1212719184870383621" target="_blank" class="social-icon">
+                <i class="fab fa-discord"></i>
+            </a>
         </div>
     </div>
 
     <script>
-        // Particle.js configuration
+        // Particles.js Configuration
         particlesJS('particles-js', {
             particles: {
                 number: { value: 80 },
@@ -236,30 +256,58 @@
             retina_detect: true
         });
 
-        // Countdown timer
+        // Countdown Timer
         const countDownDate = new Date("Jan 1, 2026 00:00:00").getTime();
-
-        const x = setInterval(() => {
+        const timer = setInterval(() => {
             const now = new Date().getTime();
             const distance = countDownDate - now;
 
-            document.getElementById('days').innerHTML = Math.floor(distance / (1000 * 60 * 60 * 24));
-            document.getElementById('hours').innerHTML = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            document.getElementById('minutes').innerHTML = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            document.getElementById('seconds').innerHTML = Math.floor((distance % (1000 * 60)) / 1000);
+            document.getElementById('days').innerHTML = Math.floor(distance / (86400000));
+            document.getElementById('hours').innerHTML = Math.floor((distance % 86400000) / 3600000);
+            document.getElementById('minutes').innerHTML = Math.floor((distance % 3600000) / 60000);
+            document.getElementById('seconds').innerHTML = Math.floor((distance % 60000) / 1000);
 
             if (distance < 0) {
-                clearInterval(x);
-                document.getElementById("countdown").innerHTML = "LAUNCHED";
+                clearInterval(timer);
+                document.querySelector('.countdown').innerHTML = "<div class='neon-title'>LAUNCHED! 🚀</div>";
             }
         }, 1000);
 
-        // Newsletter button animation
-        document.querySelector('.newsletter-button').addEventListener('click', function() {
-            this.style.transform = 'scale(0.9)';
-            setTimeout(() => this.style.transform = 'scale(1)', 200);
+        // Email Form Handling
+        document.getElementById('emailForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('emailInput').value.trim();
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.style.display = 'none';
+
+            // Email Validation
+            if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                errorDiv.textContent = "⚠️ Please enter a valid email address";
+                errorDiv.style.display = 'block';
+                return;
+            }
+
+            try {
+                const response = await fetch('', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({email: email.toLowerCase()})
+                });
+                
+                const result = await response.json();
+                
+                if(result.success) {
+                    alert('🎉 Thank you for subscribing!');
+                    document.getElementById('emailInput').value = '';
+                } else if(result.error === 'DUPLICATE_EMAIL') {
+                    errorDiv.textContent = "❌ Email already registered!";
+                    errorDiv.style.display = 'block';
+                }
+            } catch (error) {
+                errorDiv.textContent = "🔥 Server error! Please try again later.";
+                errorDiv.style.display = 'block';
+            }
         });
     </script>
-    <script src="https://kit.fontawesome.com/your-kit-code.js" crossorigin="anonymous"></script>
 </body>
 </html>
