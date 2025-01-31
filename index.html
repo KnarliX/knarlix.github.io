@@ -7,183 +7,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&family=Roboto:wght@300;500;700&display=swap" rel="stylesheet">
     <link rel="icon" href="Universe/knarlix.ico" type="image/x-icon">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
-    <!-- Replace YOUR_KIT_CODE with your Font Awesome kit code -->
     <script src="https://kit.fontawesome.com/417eea53de.js" crossorigin="anonymous"></script>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background: linear-gradient(45deg, #0a0a2e, #1a1a4a);
-            color: #fff;
-            font-family: 'Roboto', sans-serif;
-            overflow: hidden;
-        }
-
-        #particles-js {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-        }
-
-        .container {
-            position: relative;
-            z-index: 2;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-            text-align: center;
-        }
-
-        .neon-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 4.5rem;
-            text-transform: uppercase;
-            margin-bottom: 2rem;
-            text-shadow: 0 0 15px rgba(0, 255, 255, 0.7);
-            animation: neonPulse 2s infinite alternate;
-            background: linear-gradient(45deg, #00ffff, #ff00ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        @keyframes neonPulse {
-            from {
-                text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
-            }
-            to {
-                text-shadow: 0 0 25px rgba(0, 255, 255, 0.9),
-                            0 0 35px rgba(255, 0, 255, 0.7);
-            }
-        }
-
-        .countdown {
-            display: flex;
-            gap: 2.5rem;
-            margin: 3rem 0;
-        }
-
-        .countdown-item {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 1.5rem 2.5rem;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .countdown-item:hover {
-            transform: translateY(-10px);
-        }
-
-        .countdown-number {
-            font-size: 3rem;
-            font-weight: 700;
-            color: #00ffff;
-        }
-
-        .countdown-label {
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: #ff00ff;
-        }
-
-        .newsletter {
-            margin-top: 2rem;
-            position: relative;
-        }
-
-        .newsletter-input {
-            padding: 1.2rem 2rem;
-            font-size: 1.1rem;
-            border: none;
-            border-radius: 30px;
-            width: 400px;
-            background: rgba(255, 255, 255, 0.1);
-            color: #fff;
-            backdrop-filter: blur(5px);
-            transition: all 0.3s ease;
-        }
-
-        .newsletter-input:focus {
-            outline: none;
-            background: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
-        }
-
-        .newsletter-button {
-            position: absolute;
-            right: 5px;
-            top: 5px;
-            padding: 0.9rem 2rem;
-            border: none;
-            border-radius: 25px;
-            background: linear-gradient(45deg, #00ffff, #ff00ff);
-            color: #000;
-            font-weight: 700;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        .newsletter-button:hover {
-            transform: scale(1.05);
-        }
-
-        .social-links {
-            position: fixed;
-            bottom: 2rem;
-            display: flex;
-            gap: 1.5rem;
-            z-index: 3;
-        }
-
-        .social-icon {
-            font-size: 1.5rem;
-            color: rgba(255, 255, 255, 0.7);
-            transition: all 0.3s ease;
-        }
-
-        .social-icon:hover {
-            color: #00ffff;
-            transform: translateY(-3px);
-        }
-
-        #errorMessage {
-            color: #ff4444;
-            margin-top: 10px;
-            display: none;
-            font-size: 0.9rem;
-        }
-
-        @media (max-width: 768px) {
-            .neon-title {
-                font-size: 3rem;
-            }
-
-            .countdown {
-                flex-wrap: wrap;
-                gap: 1rem;
-            }
-
-            .newsletter-input {
-                width: 90vw;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="particles-js"></div>
     
     <div class="container">
-        <h1 class="neon-title">Epic Launch Incoming</h1>
+        <h1 class="neon-title">COMING SOON</h1>
         
         <div class="countdown">
             <div class="countdown-item">
@@ -206,9 +37,9 @@
 
         <form class="newsletter" id="emailForm">
             <input type="email" class="newsletter-input" id="emailInput" 
-                   placeholder="Enter email for early access" required>
+                   placeholder="Enter your email address" required>
+            <button type="submit" class="newsletter-button">Notify me</button>
             <div id="errorMessage"></div>
-            <button type="submit" class="newsletter-button">Notify Me</button>
         </form>
 
         <div class="social-links">
@@ -225,90 +56,15 @@
                 <i class="fab fa-discord"></i>
             </a>
         </div>
+
+        <div class="success-overlay" id="successOverlay">
+            <div class="success-content">
+                <div class="neon-title" style="font-size: 3rem">ACCESS GRANTED!</div>
+                <p style="margin-top: 2rem; font-size: 1.5rem">Prepare for liftoff 🚀</p>
+            </div>
+        </div>
     </div>
 
-    <script>
-        // Particles.js Configuration
-        particlesJS('particles-js', {
-            particles: {
-                number: { value: 80 },
-                color: { value: '#ffffff' },
-                shape: { type: 'circle' },
-                opacity: { value: 0.5 },
-                size: { value: 3 },
-                move: {
-                    enable: true,
-                    speed: 2,
-                    direction: 'none',
-                    random: false,
-                    straight: false,
-                    out_mode: 'out',
-                    bounce: false,
-                }
-            },
-            interactivity: {
-                detect_on: 'canvas',
-                events: {
-                    onhover: { enable: true, mode: 'repulse' },
-                    onclick: { enable: true, mode: 'push' },
-                    resize: true
-                }
-            },
-            retina_detect: true
-        });
-
-        // Countdown Timer
-        const countDownDate = new Date("Jan 1, 2026 00:00:00").getTime();
-        const timer = setInterval(() => {
-            const now = new Date().getTime();
-            const distance = countDownDate - now;
-
-            document.getElementById('days').innerHTML = Math.floor(distance / (86400000));
-            document.getElementById('hours').innerHTML = Math.floor((distance % 86400000) / 3600000);
-            document.getElementById('minutes').innerHTML = Math.floor((distance % 3600000) / 60000);
-            document.getElementById('seconds').innerHTML = Math.floor((distance % 60000) / 1000);
-
-            if (distance < 0) {
-                clearInterval(timer);
-                document.querySelector('.countdown').innerHTML = "<div class='neon-title'>LAUNCHED! 🚀</div>";
-            }
-        }, 1000);
-
-        // Email Form Handling
-        document.getElementById('emailForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const email = document.getElementById('emailInput').value.trim();
-            const errorDiv = document.getElementById('errorMessage');
-            errorDiv.style.display = 'none';
-
-            // Email Validation
-            if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-                errorDiv.textContent = "⚠️ Please enter a valid email address";
-                errorDiv.style.display = 'block';
-                return;
-            }
-
-            try {
-                const response = await fetch('', {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({email: email.toLowerCase()})
-                });
-                
-                const result = await response.json();
-                
-                if(result.success) {
-                    alert('🎉 Thank you for subscribing!');
-                    document.getElementById('emailInput').value = '';
-                } else if(result.error === 'DUPLICATE_EMAIL') {
-                    errorDiv.textContent = "your Email already registered!";
-                    errorDiv.style.display = 'block';
-                }
-            } catch (error) {
-                errorDiv.textContent = "Server error! Please try again later.";
-                errorDiv.style.display = 'block';
-            }
-        });
-    </script>
+    <script src="main.js"></script>
 </body>
 </html>
