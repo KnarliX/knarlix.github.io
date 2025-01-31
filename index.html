@@ -300,11 +300,11 @@
                     alert('🎉 Thank you for subscribing!');
                     document.getElementById('emailInput').value = '';
                 } else if(result.error === 'DUPLICATE_EMAIL') {
-                    errorDiv.textContent = "❌ Email already registered!";
+                    errorDiv.textContent = "your Email already registered!";
                     errorDiv.style.display = 'block';
                 }
             } catch (error) {
-                errorDiv.textContent = "🔥 Server error! Please try again later.";
+                errorDiv.textContent = "Server error! Please try again later.";
                 errorDiv.style.display = 'block';
             }
         });
