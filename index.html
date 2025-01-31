@@ -35,12 +35,24 @@
             </div>
         </div>
 
-        <form class="newsletter" id="emailForm">
-            <input type="email" class="newsletter-input" id="emailInput" 
-                   placeholder="Enter your email address" required>
-            <button type="submit" class="newsletter-button">Notify me</button>
-            <div id="errorMessage"></div>
-        </form>
+        <!-- Newsletter Section -->
+    <form class="newsletter" id="emailForm" method="POST" action="https://formspree.io/f/mbldyokj">
+        <input type="email" name="email" class="newsletter-input" id="emailInput" 
+           placeholder="Enter your email address" required>
+         <button type="submit" class="newsletter-button">Notify me</button>
+      <div id="errorMessage"></div>
+    </form>
+
+      <!-- Success Animation -->
+    <div class="success-overlay" id="successOverlay">
+        <div class="success-content">
+           <div class="neon-title" style="font-size: 3rem">ACCESS GRANTED!</div>
+           <div class="confetti"></div>
+           <div class="confetti"></div>
+            <div class="confetti"></div>
+           <div class="confetti"></div>
+        </div>
+    </div>
 
         <div class="social-links">
             <a href="https://github.com/KnarliX/" target="_blank" class="social-icon">
@@ -65,7 +77,14 @@
         </div>
     </div>
 
-    <script src="main.js"></script>
-    <script src="email.js"></script>
+    <!-- Firebase Scripts जोड़ें -->
+    <script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
+  import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
+    </script>
+
+    <!-- email.js को module बनाएं -->
+    <script type="module" src="email.js"></script>
+    <script src="main.js"></script
 </body>
 </html>
