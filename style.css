@@ -255,3 +255,33 @@ body {
         gap: 1.5rem;
     }
 }
+/* Confetti Animation */
+.confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: var(--neon-pink);
+    animation: confettiFall 3s ease-out forwards;
+    z-index: 1001;
+}
+
+@keyframes confettiFall {
+    0% {
+        transform: translateY(-100vh) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+.success-overlay {
+    /* Existing styles */
+    background: rgba(0,0,0,0.95);
+}
+
+.success-content {
+    position: relative;
+    overflow: hidden;
+}
