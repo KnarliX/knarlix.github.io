@@ -104,3 +104,8 @@ if (localStorage.getItem('knarlixSubscribed')) {
   document.getElementById('emailForm').style.display = 'none';
   document.querySelector('.neon-title').textContent = 'WELCOME BACK!';
 }
+ // email Basic validation
+  if (!/^\S+@\S+\.\S+$/.test(email)) {
+    showError('⚠️ Please enter valid email');
+    return;
+  }
