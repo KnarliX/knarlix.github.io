@@ -1,5 +1,4 @@
 // ========== CONFIGURATION ========== //
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz7UQ7pYGvBc9_qSSQZdidP2qeAZbFXL_By5xxTEXaiwahtkQb3suz3U8cmWr-J6gA/exec';
 const COUNTDOWN_DATE = new Date("2030-01-01T00:00:00");
 
 // ========== PARTICLES ========== //
