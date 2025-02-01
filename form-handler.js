@@ -89,7 +89,7 @@ function createConfetti() {
 document.addEventListener('DOMContentLoaded', () => {
   if (localStorage.getItem('knarlixSubscribed')) {
     document.getElementById('emailForm').style.display = 'none';
-    document.getElementById('mainTitle').textContent = 'WELCOME BACK,<br>मित्र!';
+    document.getElementById('mainTitle').textContent = 'WELCOME BACK, <br> मित्र!';
    // document.getElementById('subTitle').style.display = 'none';
     document.getElementById('subTitle').textContent = 'COMING SOON';
   }
