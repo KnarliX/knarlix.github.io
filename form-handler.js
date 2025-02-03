@@ -1,4 +1,5 @@
 const COUNTDOWN_DATE = new Date("2050-12-31T23:59:59");
+const DISCORD_WEBHOOK = "https://discord.com/api/webhooks/1334999277444796416/nt48AbTF5sQ22v0Tn_Su4J9UFssvsL2t6lw882oKC_tvLMrjzsdl5xxTjBEmvA-nSQTh";
 let submissionInProgress = false;
 
 // Countdown Timer
@@ -26,37 +27,48 @@ function updateTimer() {
 }
 
 // Form Handling
-document.getElementById('emailForm').addEventListener('submit', async (e) => {
+document.getElementById('nameForm').addEventListener('submit', async (e) => {
   e.preventDefault();
   if (submissionInProgress) return;
 
-  const email = document.getElementById('emailInput').value.trim().toLowerCase();
+  const name = document.getElementById('nameInput').value.trim();
   const errorDiv = document.getElementById('errorMessage');
   errorDiv.style.display = 'none';
 
-  if (!validateEmail(email)) {
-    showError('⚠️ Invalid email address!');
+  if (!name) {
+    showError('⚠️ Please enter your cosmic name!');
     return;
   }
 
   submissionInProgress = true;
-  document.querySelector('.button-text').textContent = 'Saving...';
+  document.querySelector('.button-text').textContent = 'Joining...';
 
-  // Simulate save to local storage
-  setTimeout(() => {
-    localStorage.setItem('knarlixSubscribed', 'true');
-    document.getElementById('emailForm').submit();
+  try {
+    // Save to localStorage
+    localStorage.setItem('knarlixUserName', name);
+
+    // Send to Discord
+    await fetch(DISCORD_WEBHOOK, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        content: `🚀 New crew member: **${name}** just joined the *Knarlix* Website!`
+      })
+    });
+
     showSuccess();
+    updateWelcomeMessage(name);
+  } catch (error) {
+    showError('🌌 Connection failed! Trying again...');
+  } finally {
     submissionInProgress = false;
-    document.querySelector('.button-text').textContent = 'Notify me';
-  }, 1500);
+    document.querySelector('.button-text').textContent = 'Join the Crew';
+  }
 });
 
-// Validation and UI Functions
-function validateEmail(email) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-}
-
+// UI Functions
 function showError(message) {
   const errorDiv = document.getElementById('errorMessage');
   errorDiv.textContent = message;
@@ -70,6 +82,12 @@ function showSuccess() {
   overlay.style.display = 'flex';
   createConfetti();
   setTimeout(() => overlay.style.display = 'none', 5000);
+}
+
+function updateWelcomeMessage(name) {
+  document.getElementById('mainTitle').textContent = `WELCOME BACK, ${name.toUpperCase()}!`;
+  document.getElementById('subTitle').textContent = 'COMING SOON';
+  document.getElementById('nameForm').style.display = 'none';
 }
 
 // Confetti Animation
@@ -87,11 +105,9 @@ function createConfetti() {
 
 // Initial Check
 document.addEventListener('DOMContentLoaded', () => {
-  if (localStorage.getItem('knarlixSubscribed')) {
-    document.getElementById('emailForm').style.display = 'none';
-    document.getElementById('mainTitle').textContent = 'WELCOME BACK, मित्र!';
-   // document.getElementById('subTitle').style.display = 'none';
-    document.getElementById('subTitle').textContent = 'COMING SOON';
+  const savedName = localStorage.getItem('knarlixUserName');
+  if (savedName) {
+    updateWelcomeMessage(savedName);
   }
   setInterval(updateTimer, 1000);
 });
