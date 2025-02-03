@@ -15,7 +15,7 @@
     
     <div class="container">
         <h1 class="neon-title cosmic-text" id="mainTitle">COMING SOON</h1>
-        <h2 class="neon-subtitle" id="subTitle">WELCOME TO KnarliX</h2>
+        <h2 class="neon-subtitle" id="subTitle">WELCOME TO <br>KnarliX</h2>
         
         <div class="countdown">
             <div class="countdown-item">
@@ -36,11 +36,11 @@
             </div>
         </div>
 
-        <form class="newsletter" id="emailForm" method="POST" action="https://formspree.io/f/mbldyokj-l">
-            <input type="name" name="name" class="newsletter-input" id="namelInput" 
-                   placeholder="Enter your name" required>
+        <form class="newsletter" id="emailForm" method="POST" action="https://formspree.io/f/mbldyokj">
+            <input type="email" name="email" class="newsletter-input" id="emailInput" 
+                   placeholder="Enter your email address" required>
             <button type="submit" class="newsletter-button">
-                <span class="button-text">Submit</span>
+                <span class="button-text">Notify me</span>
                 <div class="loading-dots"></div>
             </button>
             <div id="errorMessage"></div>
@@ -69,7 +69,8 @@
             </div>
         </div>
         </div>
-    </div> 
+    </div>
+
     <script src="particles-config.js"></script>
     <script src="form-handler.js"></script>
 </body>
