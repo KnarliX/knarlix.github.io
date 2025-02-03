@@ -85,7 +85,7 @@ function showSuccess() {
 }
 
 function updateWelcomeMessage(name) {
-  document.getElementById('mainTitle').textContent = `WELCOME BACK, ${name.toUpperCase()}!`;
+  document.getElementById('mainTitle').textContent = `WELCOME TO KnarliX, ${name.toUpperCase()}!`;
   document.getElementById('subTitle').textContent = 'COMING SOON';
   document.getElementById('nameForm').style.display = 'none';
 }
